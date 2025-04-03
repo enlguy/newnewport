@@ -4,6 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
+import { Neonderthaw } from "next/font/google";
+
+const neon = Neonderthaw({
+  variable: "--font-neonderthaw-regular",
+  subsets: ["latin"],
+  weight: "400",
+});
 
 function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,9 +36,11 @@ function NavBar() {
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               {/* LOGO */}
-              <Link href="/">
-                <h2 className="text-2xl text-cyan-600 font-bold ">LOGO</h2>
-              </Link>
+              <div className={neon.className}>
+                <Link href="/" className="text-[#cc7af3]">
+                  Jack Epner
+                </Link>
+              </div>
               {/* HAMBURGER BUTTON FOR MOBILE */}
               <div className="md:hidden">
                 <button
