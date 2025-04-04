@@ -45,14 +45,16 @@ const Hero = () => {
                 <Link href="https://soundcloud.com/tsearcher">music</Link>
               </span>
             </li>
-            <li className="list-disc">I have lived in 15 countries</li>
+            <li className="list-disc">I have taught university courses</li>
           </ul>
-          <button
-            type="button"
-            className="px-5 py-2.5 mt-10 rounded text-[15px] font-medium outline-none tracking-wide bg-[#0484d4] text-white hover:bg-blue-700"
-          >
-            Explore
-          </button>
+          <Link href="projects">
+            <button
+              type="button"
+              className="px-5 py-2.5 mt-10 rounded text-[15px] font-medium outline-none tracking-wide bg-[#0484d4] text-white hover:bg-blue-700"
+            >
+              Explore my Tech Work
+            </button>
+          </Link>
         </div>
       </div>
     </div>
