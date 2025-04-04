@@ -1,6 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Bad_Script } from "next/font/google";
+
+const script = Bad_Script({
+  variable: "--bad-script-regular",
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const Hero = () => {
   return (
@@ -15,10 +22,10 @@ const Hero = () => {
         />
 
         <div className="max-md:order-1 max-md:text-center">
-          <div className="text-[white] text-2xl font-medium md:text-5xl md:leading-10">
-            A Digital Man of Mystery
+          <div className="text-[white] text-2xl font-medium md:text-5xl md:leading-10 mb-15">
+            <div className={script.className}>A Digital Man of Mystery</div>
           </div>
-          <ul className="mt-4 text-sm text-slate-600 leading-relaxed">
+          <ul className="mt-4 text-sm text-[#12c5f7] leading-relaxed space-y-[1.5]">
             <li className="list-disc">I have lived in 15 countries</li>
             <li className="list-disc">
               I have worked in{" "}
@@ -29,13 +36,20 @@ const Hero = () => {
                 </Link>
               </span>
             </li>
-            <li className="list-disc">I have lived in 15 countries</li>
-            <li className="list-disc">I have lived in 15 countries</li>
+            <li className="list-disc">
+              I have worked on marketing projects for the World Cup
+            </li>
+            <li className="list-disc">
+              I sometimes make{" "}
+              <span className="underline">
+                <Link href="https://soundcloud.com/tsearcher">music</Link>
+              </span>
+            </li>
             <li className="list-disc">I have lived in 15 countries</li>
           </ul>
           <button
             type="button"
-            className="px-5 py-2.5 mt-10 rounded text-[15px] font-medium outline-none tracking-wide bg-blue-600 text-white hover:bg-blue-700"
+            className="px-5 py-2.5 mt-10 rounded text-[15px] font-medium outline-none tracking-wide bg-[#0484d4] text-white hover:bg-blue-700"
           >
             Explore
           </button>

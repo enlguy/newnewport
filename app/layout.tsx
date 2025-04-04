@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Neonderthaw } from "next/font/google";
+import { Bad_Script, Geist, Geist_Mono, Neonderthaw } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,6 +14,12 @@ const geistMono = Geist_Mono({
 
 const neon = Neonderthaw({
   variable: "--font-neonderthaw-regular",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const script = Bad_Script({
+  variable: "--bad-script-regular",
   subsets: ["latin"],
   weight: "400",
 });
