@@ -8,10 +8,12 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "../style.css";
+import Link from "next/link";
 
 const Projects = () => {
   return (
     <>
+      <p className="text-4xl text-center font-bold mt-5">Projects</p>
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -29,7 +31,20 @@ const Projects = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image src="/hubspot.png" alt="nature1" width={400} height={400} />
+          <div
+            style={{ position: "relative", height: "500px", width: "500px" }}
+          >
+            <Link href="https://www.potentiam.co.uk">
+              <Image src="/crm.png" alt="nature1" fill={true} />
+            </Link>
+            <p className="absolute bottom-0 text-white">
+              Large data management and optimization project for HubSpot and web
+              integrations
+            </p>
+          </div>
+          <p className="text-center font-bold">
+            Optimizing HubSpot for a Global Business
+          </p>
         </SwiperSlide>
         <SwiperSlide>
           <img src="/menu.png" />

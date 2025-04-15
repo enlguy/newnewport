@@ -52,7 +52,7 @@ const Hero = () => {
               type="button"
               className="px-5 py-2.5 mt-10 rounded text-[15px] font-medium outline-none tracking-wide bg-[#0484d4] text-white hover:bg-blue-700"
             >
-              Explore my Tech Work
+              Check out my latest project
             </button>
           </Link>
         </div>

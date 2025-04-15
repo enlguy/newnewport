@@ -3,7 +3,7 @@ import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
-import Tech from "./components/Tech";
+import TechStackGalaxy from "./components/TechStackGalaxy";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
         <Hero />
       </div>
       <div id="tech">
-        <Tech />
+        <TechStackGalaxy />
       </div>
       <div id="projects">
         <Projects />
