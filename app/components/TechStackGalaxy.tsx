@@ -27,19 +27,51 @@ interface Star {
 
 // Tech stack definitions
 const techStack = [
-  { name: "react", iconPath: "/icons/react.svg" },
+  {
+    name: "React",
+    iconPath:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+  },
   {
     name: "NextJS",
     iconPath:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
   },
-  { name: "typescript", iconPath: "/icons/typescript.svg" },
-  { name: "node", iconPath: "/icons/nodejs.svg" },
-  { name: "html5", iconPath: "/icons/html5.svg" },
-  { name: "css3", iconPath: "/icons/css3.svg" },
-  { name: "nextjs", iconPath: "/icons/nextjs.svg" },
-  { name: "tailwind", iconPath: "/icons/tailwind.svg" },
-  { name: "git", iconPath: "/icons/git.svg" },
+  {
+    name: "Typescript",
+    iconPath:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+  },
+  {
+    name: "NodeJS",
+    iconPath:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg",
+  },
+  {
+    name: "Supabase",
+    iconPath:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
+  },
+  {
+    name: "Postgres",
+    iconPath:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original-wordmark.svg",
+  },
+  {
+    name: "Google Cloud",
+    iconPath:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-plain.svg",
+  },
+  {
+    name: "TailwindCSS",
+    iconPath:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original-wordmark.svg",
+  },
+  {
+    name: "HTML5",
+    iconPath:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg",
+  },
   { name: "github", iconPath: "/icons/github.svg" },
 ];
 
@@ -74,27 +106,79 @@ const TechStackGalaxy: React.FC = () => {
     const icons: TechIcon[] = [];
     let loadedCount = 0;
 
-    techStack.forEach((tech, index) => {
-      const angle = (index / techStack.length) * Math.PI * 10;
-      const radius = 300 + Math.random() * 100;
+    // Helper function to calculate distance between two points in 3D space
+    const distance3D = (
+      x1: number,
+      y1: number,
+      z1: number,
+      x2: number,
+      y2: number,
+      z2: number
+    ) => {
+      return Math.sqrt(
+        Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2) + Math.pow(z1 - z2, 2)
+      );
+    };
+
+    // Helper function to generate random position with minimum distance check
+    const generatePosition = (
+      existingPositions: { x: number; y: number; z: number }[]
+    ) => {
+      const minDistance = 400; // Minimum distance between icons
+      let attempts = 0;
+      const maxAttempts = 100;
+
+      while (attempts < maxAttempts) {
+        const phi = Math.random() * Math.PI * 2;
+        const theta = Math.acos(2 * Math.random() - 1); // Better distribution on sphere
+        const radius = 800 + Math.random() * 600; // Increased radius range
+
+        const x = radius * Math.sin(theta) * Math.cos(phi);
+        const y = radius * Math.sin(theta) * Math.sin(phi);
+        const z = radius * Math.cos(theta);
+
+        // Check distance from all existing positions
+        const isFarEnough = existingPositions.every(
+          (pos) => distance3D(x, y, z, pos.x, pos.y, pos.z) >= minDistance
+        );
+
+        if (isFarEnough || attempts === maxAttempts - 1) {
+          return { x, y, z };
+        }
+
+        attempts++;
+      }
+
+      // Fallback position if we couldn't find a good spot
+      return {
+        x: Math.random() * 2000 - 1000,
+        y: Math.random() * 2000 - 1000,
+        z: Math.random() * 2000 - 1000,
+      };
+    };
+
+    const existingPositions: { x: number; y: number; z: number }[] = [];
+
+    techStack.forEach((tech) => {
+      const position = generatePosition(existingPositions);
+      existingPositions.push(position);
 
       const icon: TechIcon = {
         x: 0,
         y: 0,
-        z: Math.random() * 1000 + 500,
-        x3d: Math.cos(angle) * radius,
-        y3d: Math.sin(angle) * radius,
-        z3d: Math.random() * 500 - 250,
-        size: 4,
-        speed: Math.random() * 0.5 + 0.2,
-        rotationSpeed: Math.random() * 0.02 + 0.01,
-        angle: 0,
+        z: Math.random() * 1200 - 600,
+        x3d: position.x,
+        y3d: position.y,
+        z3d: position.z,
+        size: 20,
+        speed: Math.random() * 0.2 + 0.1,
+        rotationSpeed: Math.random() * 0.005 + 0.002,
+        angle: Math.random() * Math.PI * 2,
         name: tech.name,
         loaded: false,
         image: new Image(),
       };
 
-      // Load the icon image
       icon.image.onload = () => {
         icon.loaded = true;
         loadedCount++;
@@ -107,7 +191,6 @@ const TechStackGalaxy: React.FC = () => {
 
       icon.image.onerror = () => {
         console.error(`Failed to load icon: ${tech.name}`);
-        // Still mark as loaded to avoid hanging
         loadedCount++;
         setIconsLoaded(loadedCount);
 
@@ -116,23 +199,21 @@ const TechStackGalaxy: React.FC = () => {
         }
       };
 
-      // Set src after defining handlers
       icon.image.src = tech.iconPath;
-
       icons.push(icon);
     });
 
     techIconsRef.current = icons;
 
     // Create stars
-    const starCount = 200;
+    const starCount = 400;
     const stars: Star[] = [];
 
     for (let i = 0; i < starCount; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 1.25,
+        size: Math.random() * 1.8,
         twinkle: Math.random() * 0.05 + 0.01,
       });
     }
@@ -148,7 +229,6 @@ const TechStackGalaxy: React.FC = () => {
 
     window.addEventListener("resize", handleResize);
 
-    // Cleanup function
     return () => {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationRef.current);
@@ -187,7 +267,6 @@ const TechStackGalaxy: React.FC = () => {
       // Draw stars
       ctx.fillStyle = "white";
       starsRef.current.forEach((star) => {
-        // Make stars twinkle
         const twinkleSize =
           star.size * (1 + Math.sin(Date.now() * star.twinkle) * 0.5);
         ctx.beginPath();
@@ -197,16 +276,13 @@ const TechStackGalaxy: React.FC = () => {
 
       // Update tech icons
       techIconsRef.current.forEach((icon) => {
-        // Mouse influence
         const mouseXInfluence =
-          (mousePosition.x - window.innerWidth / 2) * 0.0001;
+          (mousePosition.x - window.innerWidth / 2) * 0.00008;
         const mouseYInfluence =
-          (mousePosition.y - window.innerHeight / 2) * 0.0001;
+          (mousePosition.y - window.innerHeight / 2) * 0.00008;
 
-        // Rotate in 3D space
         icon.angle += icon.rotationSpeed;
 
-        // Apply rotation in X-Z plane (horizontal)
         const cosA = Math.cos(mouseXInfluence);
         const sinA = Math.sin(mouseXInfluence);
         const x3dNew = icon.x3d * cosA - icon.z3d * sinA;
@@ -214,7 +290,6 @@ const TechStackGalaxy: React.FC = () => {
         icon.x3d = x3dNew;
         icon.z3d = z3dNew;
 
-        // Apply rotation in Y-Z plane (vertical)
         const cosB = Math.cos(mouseYInfluence);
         const sinB = Math.sin(mouseYInfluence);
         const y3dNew = icon.y3d * cosB - icon.z3d * sinB;
@@ -222,21 +297,19 @@ const TechStackGalaxy: React.FC = () => {
         icon.y3d = y3dNew;
         icon.z3d = z3dNew2;
 
-        // Project 3D position to 2D screen
-        const scale = 500 / (icon.z3d + 1500); // Perspective projection
+        const scale = 800 / (icon.z3d + 2500);
         icon.x = icon.x3d * scale + window.innerWidth / 2;
         icon.y = icon.y3d * scale + window.innerHeight / 2;
-        icon.size = scale * 30; // Larger size for icons
+        icon.size = scale * 180;
       });
 
-      // Sort icons by z-depth for proper rendering (furthest first)
+      // Sort icons by z-depth
       techIconsRef.current.sort((a, b) => b.z3d - a.z3d);
 
       // Draw tech icons
       techIconsRef.current.forEach((icon) => {
         if (icon.loaded) {
           ctx.save();
-          // Draw the icon image
           const size = icon.size;
           ctx.drawImage(
             icon.image,
@@ -246,18 +319,15 @@ const TechStackGalaxy: React.FC = () => {
             size
           );
 
-          // Optional: Add name label under icon
           if (icon.z3d > 0) {
-            // Only show label for icons in front
             ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-            ctx.font = `${Math.max(10, icon.size / 3)}px Arial`;
+            ctx.font = `${Math.max(16, icon.size / 3)}px Arial`;
             ctx.textAlign = "center";
-            ctx.fillText(icon.name, icon.x, icon.y + icon.size / 2 + 15);
+            ctx.fillText(icon.name, icon.x, icon.y + icon.size / 2 + 24);
           }
 
           ctx.restore();
         } else {
-          // Placeholder while loading
           ctx.save();
           ctx.fillStyle = "#444";
           ctx.beginPath();
@@ -267,7 +337,6 @@ const TechStackGalaxy: React.FC = () => {
         }
       });
 
-      // Loading indicator if not all icons are loaded
       if (!allIconsLoaded) {
         const loadedPercent = (iconsLoaded / techStack.length) * 100;
         ctx.fillStyle = "white";
@@ -280,13 +349,11 @@ const TechStackGalaxy: React.FC = () => {
         );
       }
 
-      // Continue animation
       animationRef.current = requestAnimationFrame(animate);
     };
 
     animate();
 
-    // Cleanup animation on unmount
     return () => {
       cancelAnimationFrame(animationRef.current);
     };
@@ -308,21 +375,6 @@ const TechStackGalaxy: React.FC = () => {
         }}
       >
         My Tech Stack Galaxy
-      </div>
-      <div
-        className="info"
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          left: "20px",
-          color: "white",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          padding: "10px",
-          borderRadius: "5px",
-          fontSize: "14px",
-        }}
-      >
-        Move your mouse to interact with the galaxy
       </div>
       <canvas
         ref={canvasRef}
