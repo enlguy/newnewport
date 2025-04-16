@@ -70,8 +70,7 @@ const techStack = [
   },
   {
     name: "HTML5",
-    iconPath:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg",
+    iconPath: "https://static.cdnlogo.com/logos/h/53/html5.svg",
   },
   {
     name: "CSS3",

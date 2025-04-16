@@ -89,13 +89,14 @@ const Contact: React.FC = () => {
             <p className="text-red-500 text-sm mt-1">This field is required</p>
           )}
         </div>
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          Send Message
-        </button>
+        <div className="flex justify-center mt-6">
+          <button
+            type="submit"
+            className="bg-blue-500 text-white py-2 px-4 rounded"
+          >
+            Send Message
+          </button>
+        </div>
       </form>
     </div>
   );
