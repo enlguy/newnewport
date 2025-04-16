@@ -1,15 +1,33 @@
 "use client";
-import * as animationData from "../../public/github.lottie";
-import { useLottie } from "lottie-react";
+import { useEffect, useRef } from "react";
+import "@dotlottie/player-component";
 
 const LottieComponent = () => {
-  const defaultOptions = {
-    animationData: animationData,
-    loop: true,
-  };
-  const { View } = useLottie(defaultOptions);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  return <>{View}</>;
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    // Create the player element
+    const player = document.createElement("dotlottie-player");
+    player.setAttribute("src", "/github.lottie");
+    player.setAttribute("autoplay", "");
+    player.setAttribute("loop", "");
+    player.style.width = "30%";
+    player.style.height = "30%";
+
+    // Add it to our container
+    containerRef.current.innerHTML = "";
+    containerRef.current.appendChild(player);
+
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.innerHTML = "";
+      }
+    };
+  }, []);
+
+  return <div ref={containerRef} style={{ width: "30%", height: "30%" }} />;
 };
 
 export default LottieComponent;

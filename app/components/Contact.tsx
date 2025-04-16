@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import LottieComponent from "../components/LottieComponent";
 
 interface ContactForm {
   name: string;
@@ -42,6 +43,7 @@ const Contact: React.FC = () => {
   return (
     <div className="container mx-auto py-8 bg-white">
       <h1 className="text-3xl font-bold mb-8 text-center">Contact</h1>
+      <LottieComponent />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-lg mx-auto p-6 rounded-lg shadow-lg"
