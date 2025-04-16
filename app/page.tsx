@@ -2,7 +2,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Projects from "./components/Projects";
+import NewProjects from "./components/NewProjects";
 import TechStackGalaxy from "./components/TechStackGalaxy";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
         <TechStackGalaxy />
       </div>
       <div id="projects">
-        <Projects />
+        <NewProjects />
       </div>
       <div id="about">
         <About />
