@@ -23,6 +23,7 @@ interface Star {
   y: number;
   size: number;
   twinkle: number;
+  color: string;
 }
 
 // Tech stack definitions
@@ -72,8 +73,28 @@ const techStack = [
     iconPath:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg",
   },
-  { name: "github", iconPath: "/icons/github.svg" },
+  {
+    name: "CSS3",
+    iconPath:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
+  },
 ];
+
+// Synthwave color palette
+const synthwaveColors = {
+  background: "#0f0624", // Deep purple background
+  neon: {
+    pink: "#ff00ff",
+    blue: "#00ffff",
+    purple: "#bf00ff",
+  },
+  starColors: [
+    "rgba(255, 255, 255, 0.8)",
+    "rgba(255, 0, 255, 0.7)",
+    "rgba(0, 255, 255, 0.7)",
+    "rgba(191, 0, 255, 0.7)",
+  ],
+};
 
 const TechStackGalaxy: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -205,7 +226,7 @@ const TechStackGalaxy: React.FC = () => {
 
     techIconsRef.current = icons;
 
-    // Create stars
+    // Create stars with synthwave colors
     const starCount = 400;
     const stars: Star[] = [];
 
@@ -215,6 +236,10 @@ const TechStackGalaxy: React.FC = () => {
         y: Math.random() * canvas.height,
         size: Math.random() * 1.8,
         twinkle: Math.random() * 0.05 + 0.01,
+        color:
+          synthwaveColors.starColors[
+            Math.floor(Math.random() * synthwaveColors.starColors.length)
+          ],
       });
     }
     starsRef.current = stars;
@@ -260,18 +285,55 @@ const TechStackGalaxy: React.FC = () => {
     if (!ctx) return;
 
     const animate = () => {
-      // Clear canvas
-      ctx.fillStyle = "#050A30";
+      // Create a synthwave gradient background
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, synthwaveColors.background);
+      gradient.addColorStop(0.5, "#1a0836"); // Mid-tone purple
+      gradient.addColorStop(1, "#320a5c"); // Darker purple at bottom
+
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw stars
-      ctx.fillStyle = "white";
+      // Add a subtle grid effect (optional)
+      // Can be uncommented if you want a grid effect like in the image
+      /*
+      ctx.strokeStyle = "rgba(255, 0, 255, 0.15)";
+      ctx.lineWidth = 1;
+      const gridSize = 50;
+      
+      // Horizontal lines
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+      
+      // Vertical lines
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      */
+
+      // Draw colorful stars
       starsRef.current.forEach((star) => {
+        ctx.fillStyle = star.color;
         const twinkleSize =
           star.size * (1 + Math.sin(Date.now() * star.twinkle) * 0.5);
         ctx.beginPath();
         ctx.arc(star.x, star.y, twinkleSize, 0, Math.PI * 2);
         ctx.fill();
+
+        // Add glow effect to some stars
+        if (Math.random() > 0.7) {
+          ctx.shadowBlur = 15;
+          ctx.shadowColor = star.color;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
       });
 
       // Update tech icons
@@ -306,10 +368,17 @@ const TechStackGalaxy: React.FC = () => {
       // Sort icons by z-depth
       techIconsRef.current.sort((a, b) => b.z3d - a.z3d);
 
-      // Draw tech icons
+      // Draw tech icons with glow effect
       techIconsRef.current.forEach((icon) => {
         if (icon.loaded) {
           ctx.save();
+
+          // Add glow effect to icons
+          if (icon.z3d > 0) {
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = synthwaveColors.neon.blue;
+          }
+
           const size = icon.size;
           ctx.drawImage(
             icon.image,
@@ -320,7 +389,10 @@ const TechStackGalaxy: React.FC = () => {
           );
 
           if (icon.z3d > 0) {
-            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+            // Text glow and styling
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = synthwaveColors.neon.pink;
+            ctx.fillStyle = "white";
             ctx.font = `${Math.max(16, icon.size / 3)}px Arial`;
             ctx.textAlign = "center";
             ctx.fillText(icon.name, icon.x, icon.y + icon.size / 2 + 24);
@@ -329,7 +401,7 @@ const TechStackGalaxy: React.FC = () => {
           ctx.restore();
         } else {
           ctx.save();
-          ctx.fillStyle = "#444";
+          ctx.fillStyle = synthwaveColors.neon.purple;
           ctx.beginPath();
           ctx.arc(icon.x, icon.y, icon.size / 2, 0, Math.PI * 2);
           ctx.fill();
@@ -339,7 +411,7 @@ const TechStackGalaxy: React.FC = () => {
 
       if (!allIconsLoaded) {
         const loadedPercent = (iconsLoaded / techStack.length) * 100;
-        ctx.fillStyle = "white";
+        ctx.fillStyle = synthwaveColors.neon.pink;
         ctx.font = "16px Arial";
         ctx.textAlign = "center";
         ctx.fillText(
@@ -370,17 +442,19 @@ const TechStackGalaxy: React.FC = () => {
           width: "100%",
           textAlign: "center",
           color: "white",
-          fontSize: "24px",
-          textShadow: "0 0 10px rgba(0, 100, 255, 0.8)",
+          fontSize: "28px",
+          fontFamily: "'Orbitron', sans-serif",
+          textShadow: `0 0 10px ${synthwaveColors.neon.pink}, 0 0 20px ${synthwaveColors.neon.pink}`,
+          letterSpacing: "2px",
         }}
       >
-        My Tech Stack Galaxy
+        MY TECH STACK
       </div>
       <canvas
         ref={canvasRef}
         style={{
           display: "block",
-          backgroundColor: "#050A30",
+          backgroundColor: synthwaveColors.background,
           width: "100%",
           height: "100vh",
         }}
