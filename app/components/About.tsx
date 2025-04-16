@@ -196,7 +196,7 @@ const About = () => {
         </div>
 
         {/* Right column with bio */}
-        <div className="text-white">
+        <div className="text-white ml-8">
           <h3
             className="text-2xl font-bold mb-4"
             style={{ color: synthwaveColors.neon.blue }}
@@ -228,7 +228,7 @@ const About = () => {
           <div className="mt-8">
             <Link href="/resume/my-resume.pdf">
               <button
-                className="px-6 py-3 rounded-md text-white font-medium transition-all duration-300"
+                className="px-6 py-3 rounded-md text-white font-medium transition-all duration-300 cursor-pointer"
                 style={{
                   background: `linear-gradient(90deg, ${synthwaveColors.neon.purple}, ${synthwaveColors.neon.pink})`,
                   boxShadow: `0 0 15px ${synthwaveColors.neon.purple}`,

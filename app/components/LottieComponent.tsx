@@ -13,8 +13,8 @@ const LottieComponent = () => {
     player.setAttribute("src", "/github.lottie");
     player.setAttribute("autoplay", "");
     player.setAttribute("loop", "");
-    player.style.width = "30%";
-    player.style.height = "30%";
+    player.style.width = "70%";
+    player.style.height = "70%";
 
     // Add it to our container
     containerRef.current.innerHTML = "";
@@ -27,7 +27,7 @@ const LottieComponent = () => {
     };
   }, []);
 
-  return <div ref={containerRef} style={{ width: "30%", height: "30%" }} />;
+  return <div ref={containerRef} style={{ width: "70%", height: "70%" }} />;
 };
 
 export default LottieComponent;

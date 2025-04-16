@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import LottieComponent from "../components/LottieComponent";
+import Link from "next/link";
 
 interface ContactForm {
   name: string;
@@ -41,65 +42,90 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto py-8 bg-white">
+    <div className="container mx-auto py-8 bg-white mt-30">
       <h1 className="text-3xl font-bold mb-8 text-center">Contact</h1>
-      <LottieComponent />
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="max-w-lg mx-auto p-6 rounded-lg shadow-lg"
-      >
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700">
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            {...register("name", { required: true })}
-            className="w-full mt-2 p-3 border rounded-lg"
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm mt-1">This field is required</p>
-          )}
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            {...register("email", { required: true })}
-            className="w-full mt-2 p-3 border rounded-lg"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm mt-1">This field is required</p>
-          )}
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="message" className="block text-gray-700">
-            Message
-          </label>
-          <textarea
-            id="message"
-            {...register("message", { required: true })}
-            className="w-full mt-2 p-3 border rounded-lg"
-          ></textarea>
-          {errors.message && (
-            <p className="text-red-500 text-sm mt-1">This field is required</p>
-          )}
-        </div>
-        <div className="flex justify-center mt-6">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+      <div className="flex flex-col md:flex-row items-center justify-between gap-20">
+        <div className="flex-1 flex justify-center">
+          <Link
+            href="https://github.com/enlguy"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Send Message
-          </button>
+            <LottieComponent />
+          </Link>
         </div>
-      </form>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex-2 max-w-lg mx-auto p-6 rounded-lg shadow-lg"
+        >
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-gray-700">
+              Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              {...register("name", { required: true })}
+              className="w-full mt-2 p-3 border rounded-lg"
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">
+                This field is required
+              </p>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-gray-700">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              {...register("email", { required: true })}
+              className="w-full mt-2 p-3 border rounded-lg"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                This field is required
+              </p>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="message" className="block text-gray-700">
+              Message
+            </label>
+            <textarea
+              id="message"
+              {...register("message", { required: true })}
+              className="w-full mt-2 p-3 border rounded-lg"
+            ></textarea>
+            {errors.message && (
+              <p className="text-red-500 text-sm mt-1">
+                This field is required
+              </p>
+            )}
+          </div>
+          <div className="flex justify-center mt-6">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded"
+            >
+              Send Message
+            </button>
+          </div>
+        </form>
+        <div className="flex-1 flex justify-center">
+          <Link
+            href="https://github.com/enlguy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LottieComponent />
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
