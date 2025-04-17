@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import LottieComponent from "./LottieComponentLeft";
 import Link from "next/link";
 import LottieComponentLeft from "./LottieComponentLeft";
 import LottieComponentRight from "./LottieComponentRight";

@@ -205,7 +205,7 @@ const About = () => {
           </h3>
 
           <p className="mb-4">
-            I'm a multidisciplinary creative and technologist with a global
+            I&apos;m a multidisciplinary creative and technologist with a global
             perspective shaped by living in 15 countries across 4 continents. My
             journey has taken me from sales to teaching, film and television
             production to digital marketing, and now marketing operations and
@@ -220,8 +220,8 @@ const About = () => {
           </p>
 
           <p className="mb-4">
-            When I'm not at a computer, I may be found reading, exploring the
-            outdoors, or maybe just running errands....
+            When I&apos;m not at a computer, I may be found reading, exploring
+            the outdoors, or maybe just running errands....
           </p>
           <p className="mb-4">You can call me Jack.</p>
 
