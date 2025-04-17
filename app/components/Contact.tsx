@@ -2,8 +2,10 @@
 
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import LottieComponent from "../components/LottieComponent";
+import LottieComponent from "./LottieComponentLeft";
 import Link from "next/link";
+import LottieComponentLeft from "./LottieComponentLeft";
+import LottieComponentRight from "./LottieComponentRight";
 
 interface ContactForm {
   name: string;
@@ -16,6 +18,7 @@ const Contact: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ContactForm>();
 
   const onSubmit = (data: ContactForm) => {
@@ -32,6 +35,7 @@ const Contact: React.FC = () => {
       .then((response) => response.json())
       .then((data) => {
         alert("Message sent successfully!");
+        reset();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -51,7 +55,7 @@ const Contact: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <LottieComponent />
+            <LottieComponentLeft />
           </Link>
         </div>
         <form
@@ -118,11 +122,11 @@ const Contact: React.FC = () => {
         </form>
         <div className="flex-1 flex justify-center">
           <Link
-            href="https://github.com/enlguy"
+            href="https://linkedin.com/in/jack-epner"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <LottieComponent />
+            <LottieComponentRight />
           </Link>
         </div>
       </div>

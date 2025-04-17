@@ -30,7 +30,11 @@ const Hero = () => {
             <li className="list-disc">
               I have worked in{" "}
               <span className="underline">
-                <Link href="https://www.imdb.com/name/nm4821772/">
+                <Link
+                  href="https://www.imdb.com/name/nm4821772/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {" "}
                   film/TV{" "}
                 </Link>
@@ -42,7 +46,13 @@ const Hero = () => {
             <li className="list-disc">
               I sometimes make{" "}
               <span className="underline">
-                <Link href="https://soundcloud.com/tsearcher">music</Link>
+                <Link
+                  href="https://soundcloud.com/tsearcher"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  music
+                </Link>
               </span>
             </li>
             <li className="list-disc">I have taught university courses</li>

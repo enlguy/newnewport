@@ -142,18 +142,17 @@ const Projects = () => {
         "Large data management and optimization project for HubSpot and web integrations",
     },
     {
-      title: "AI-Powered Analytics Dashboard",
-      image: "/hubspot.png",
-      link: "#",
-      description:
-        "Real-time data visualization platform with machine learning insights",
+      title: "SaaS landing page and blog",
+      image: "/hubprospscreen.png",
+      link: "https://hubprosper.com/",
+      description: "Built with NextJS and Markdown for SEO optimization",
     },
     {
-      title: "E-Commerce Platform Redesign",
-      image: "/menu.png",
-      link: "#",
+      title: "YouTube Bookmarker",
+      image: "/ytext.png",
+      link: "https://chromewebstore.google.com/detail/youtube-bookmark-manager/hceieggkdlhpjhnpahpogcnkdbeknbhm",
       description:
-        "Complete UX/UI overhaul resulting in 43% increase in conversions",
+        "Browser extension in JavaScript to save time-stamped bookmarks with links on YouTube videos",
     },
     {
       title: "Mobile App Development",
@@ -247,7 +246,11 @@ const Projects = () => {
               onMouseEnter={() => setIsHovering(index)}
               onMouseLeave={() => setIsHovering(null)}
             >
-              <Link href={project.link}>
+              <Link
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <div className="relative h-full w-full">
                   <Image
                     src={project.image}

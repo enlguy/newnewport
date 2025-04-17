@@ -172,7 +172,7 @@ const About = () => {
             }}
           >
             <Image
-              src="/ChatGPTme1.png"
+              src="/head.png"
               alt="Jack Epner"
               width={500}
               height={500}
