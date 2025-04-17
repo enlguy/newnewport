@@ -57,10 +57,14 @@ const Hero = () => {
             </li>
             <li className="list-disc">I have taught university courses</li>
           </ul>
-          <Link href="projects">
+          <Link
+            href="https://github.com/enlguy?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <button
               type="button"
-              className="px-5 py-2.5 mt-10 rounded text-[15px] font-medium outline-none tracking-wide bg-[#0484d4] text-white hover:bg-blue-700"
+              className="px-5 py-2.5 mt-10 cursor-pointer rounded text-[15px] font-medium outline-none tracking-wide bg-[#0484d4] text-white hover:bg-blue-700"
             >
               Check out my latest project
             </button>

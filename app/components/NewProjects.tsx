@@ -155,24 +155,16 @@ const Projects = () => {
         "Browser extension in JavaScript to save time-stamped bookmarks with links on YouTube videos",
     },
     {
-      title: "Mobile App Development",
-      image: "/close.png",
-      link: "#",
-      description:
-        "Cross-platform application with offline capabilities and seamless sync",
+      title: "Gym Website",
+      image: "/evogym.webp",
+      link: "https://roaring-palmier-b52fe6.netlify.app/",
+      description: "Built with React and framer-motion",
     },
     {
-      title: "Custom CRM Implementation",
-      image: "/hubspot.png",
-      link: "#",
-      description:
-        "Tailored solution integrating with existing business workflows",
-    },
-    {
-      title: "Cloud Migration Strategy",
-      image: "/menu.png",
-      link: "#",
-      description: "Enterprise-level infrastructure transformation to AWS",
+      title: "GTM Strategy",
+      image: "/rw.jpg",
+      link: "https://resumeworded.com/",
+      description: "Market research and growth strategy for scaling a SaaS",
     },
   ];
 
