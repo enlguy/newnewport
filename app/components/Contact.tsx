@@ -54,6 +54,7 @@ const Contact: React.FC = () => {
             href="https://github.com/enlguy"
             target="_blank"
             rel="noopener noreferrer"
+            className="ml-25"
           >
             <LottieComponentLeft />
           </Link>
