@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import { Bad_Script, Geist, Geist_Mono, Neonderthaw } from "next/font/google";
 import "./globals.css";
 
@@ -36,6 +37,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* Conditionally render the GA component in production only */}
+      {process.env.NODE_ENV === "production" && <GoogleAnalytics />}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
