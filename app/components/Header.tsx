@@ -103,6 +103,16 @@ function NavBar() {
                   </ScrollLink>
                 </li>
                 <li>
+                  <Link
+                    href="/blog"
+                    className="cursor-pointer ${
+              isScrolled ? 'text-gray-700 hover:text-[#cc7af3]' : 'text-white hover:text-[#cc7af3]'
+            }`} hover:text-[#cc7af3]"
+                  >
+                    Blog
+                  </Link>
+                </li>
+                <li>
                   <ScrollLink
                     to="about"
                     smooth={true}
