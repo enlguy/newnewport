@@ -5,9 +5,9 @@ import BlogNavBar from '../../components/BlogHeader'
 
 // Define the props type for the component
 type BlogPostPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export async function generateStaticParams() {
@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const filePath = path.join(process.cwd(), '_posts', `${slug}.md`);
   const fileContents = await fs.readFile(filePath, 'utf8');
