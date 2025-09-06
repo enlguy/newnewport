@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import ReactMarkdown from 'react-markdown';
 import BlogNavBar from '../../components/BlogHeader'
 
 // Define the props type for the component
@@ -28,9 +29,44 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <div>
       <BlogNavBar />
-      <div className="pt-24 px-4">
-        <h1 className="text-black">Blog Post: {slug}</h1>
-        <pre>{fileContents}</pre>
+      <div className="pt-24 px-4 max-w-4xl mx-auto">
+        <h1 className="text-black text-3xl font-bold mb-8 text-center capitalize">
+          {slug.replace(/-/g, ' ')}
+        </h1>
+        
+        <article className="prose prose-lg max-w-none">
+          <ReactMarkdown
+            components={{
+              // Style paragraphs
+              p: ({ children }) => (
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  {children}
+                </p>
+              ),
+              // Style headings
+              h1: ({ children }) => (
+                <h1 className="text-2xl font-bold text-black mb-4 text-center">
+                  {children}
+                </h1>
+              ),
+              h2: ({ children }) => (
+                <h2 className="text-xl font-bold text-black mb-3 text-center">
+                  {children}
+                </h2>
+              ),
+              // Style images
+              img: ({ src, alt }) => (
+                <img 
+                  src={src} 
+                  alt={alt || ''} 
+                  className="max-w-full h-auto mx-auto my-6 rounded-lg shadow-md"
+                />
+              ),
+            }}
+          >
+            {fileContents}
+          </ReactMarkdown>
+        </article>
       </div>
     </div>
   );

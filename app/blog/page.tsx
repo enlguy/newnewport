@@ -5,7 +5,7 @@ import Link from "next/link";
 import BlogNavBar from "../components/BlogHeader";
 
 const posts = [
-  { id: 1, title: "Airbnb Goes Ape", slug: "airbnb" },
+  { id: 1, title: "Airbnb Goes Ape", slug: "airbnb-goes-ape" },
   { id: 2, title: "Another Great Post", slug: "another-great-post" },
   { id: 3, title: "A Post About Next.js", slug: "a-post-about-next-js" },
 ];
