@@ -155,10 +155,10 @@ const Projects = () => {
         "Browser extension in JavaScript to save time-stamped bookmarks with links on YouTube videos",
     },
     {
-      title: "Gym Website",
-      image: "/evogym.webp",
-      link: "https://roaring-palmier-b52fe6.netlify.app/",
-      description: "Built with React and framer-motion",
+      title: "Data Normalization Tool with HubSpot Integration",
+      image: "/normlz.png",
+      link: "https://www.normlz.com",
+      description: "Built with Nextjs, Neon Postgres, Prisma, and Next-Auth",
     },
     {
       title: "GTM Strategy",
