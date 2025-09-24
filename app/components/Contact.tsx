@@ -79,7 +79,7 @@ const Contact: React.FC = () => {
             )}
           </div>
 
-          <div className="mb-4">
+          <div id="contact" className="mb-4">
             <label htmlFor="email" className="block text-gray-700">
               Email
             </label>

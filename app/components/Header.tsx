@@ -113,6 +113,26 @@ function NavBar() {
                   </Link>
                 </li>
                 <li>
+                  <Link
+                    href="/paid-services"
+                    className="cursor-pointer ${
+              isScrolled ? 'text-gray-700 hover:text-[#cc7af3]' : 'text-white hover:text-[#cc7af3]'
+            }`} hover:text-[#cc7af3]"
+                  >
+                    Paid Services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/free-services"
+                    className="cursor-pointer ${
+              isScrolled ? 'text-gray-700 hover:text-[#cc7af3]' : 'text-white hover:text-[#cc7af3]'
+            }`} hover:text-[#cc7af3]"
+                  >
+                    Free Services
+                  </Link>
+                </li>
+                <li>
                   <ScrollLink
                     to="about"
                     smooth={true}
