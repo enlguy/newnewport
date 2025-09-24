@@ -10,22 +10,22 @@ export default function ServicesPage() {
               A Listening Ear
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Sometimes, all we need is someone to listen. This isn’t about advice,
+              Sometimes, all we need is someone to listen. This isn&quot;t about advice,
               fixing things, or judgment — just a space where you can share
-              what’s on your mind and know you’re heard.
+              what&quot;s on your mind and know you&quot;re heard.
             </p>
           </div>
 
           <div className="bg-pink-100 rounded-xl p-6 shadow-sm">
             <p className="text-gray-700 italic text-lg">
-              "You talk, I’ll listen — like a friend over coffee."
+              "You talk, I&quot;ll listen — like a friend over coffee."
             </p>
           </div>
 
           <div>
             <p className="text-gray-600">
-              If you’d like to reach out, just click below. Whether it’s five
-              minutes or an hour, I’ll be here.
+              If you&quot;d like to reach out, just click below. Whether it&quot;s five
+              minutes or an hour, I&quot;ll be here.
             </p>
             <div className="mt-6 flex justify-center">
                 <Link href="/free-services/chat">
