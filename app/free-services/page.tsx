@@ -18,7 +18,7 @@ export default function ServicesPage() {
 
           <div className="bg-pink-100 rounded-xl p-6 shadow-sm">
             <p className="text-gray-700 italic text-lg">
-              "You talk, I&quot;ll listen — like a friend over coffee."
+              &ldquo;You talk, I&quot;ll listen — like a friend over coffee.&rdquo;
             </p>
           </div>
 
