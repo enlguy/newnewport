@@ -2,7 +2,8 @@ import Link from "next/link";
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex items-center justify-center px-4 py-12">
+    <>
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex items-center justify-center px-4 pt-12 pb-4">
       <div className="max-w-2xl w-full shadow-lg rounded-2xl p-6 bg-white/80 backdrop-blur">
         <div className="space-y-6 text-center">
           <div>
@@ -38,5 +39,14 @@ export default function ServicesPage() {
         </div>
       </div>
     </div>
+    <div className="text-center pb-10">
+    <Link
+    href="/"
+    className="text-pink-600 hover:text-pink-800 underline text-sm absolute bottom-8 left-1/2 transform -translate-x-1/2"
+  >
+    ← Go Back to Homepage
+  </Link>
+    </div>
+    </>
   );
 }
