@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { pool } from '@/lib/db'
 
 export async function POST(req: NextRequest) {
+  console.log('Route hit: /api/messages/get')
+
   const { anonToken, content, fromAdmin = false } = await req.json()
   console.log('Incoming message:', { anonToken, content, fromAdmin })
 

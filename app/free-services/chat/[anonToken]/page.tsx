@@ -1,48 +1,115 @@
 "use client"
 
-import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
+
+type ChatMessage = {
+  id: number
+  content: string
+  fromAdmin: boolean
+}
 
 export default function ChatPage() {
   const { anonToken } = useParams()
-  const [messages, setMessages] = useState([
-    { id: 1, content: "Hello, feel free to share whatever is on your mind.", fromAdmin: true },
-  ]);
-  const [input, setInput] = useState("");
+  const router = useRouter()
+
+  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [input, setInput] = useState("")
 
   useEffect(() => {
-  fetch('/api/users/create', {
-    method: 'POST',
-    body: JSON.stringify({ anonToken }),
-    headers: { 'Content-Type': 'application/json' },
-  })
-}, [])
+  const urlParams = new URLSearchParams(window.location.search)
+  setIsAdmin(urlParams.get('admin') === 'true')
+  }, [])
 
-const handleSend = async () => {
-  if (!input.trim()) return;
+  // Redirect if no token
+  useEffect(() => {
+    if (!anonToken) {
+      const newToken = crypto.randomUUID()
+      console.log("Redirecting to new token:", newToken)
+      router.replace(`/${newToken}`)
+    }
+  }, [anonToken])
 
-  const newMessage = {
+  // Create user + load messages
+ useEffect(() => { 
+  const initChat = async () => {
+    if (!anonToken) return
+
+    console.log("Creating user with token:", anonToken)
+
+    const createRes = await fetch("/api/users/create", {
+      method: "POST",
+      body: JSON.stringify({ anonToken }),
+      headers: { "Content-Type": "application/json" },
+    })
+
+    if (!createRes.ok) {
+      console.error("Failed to create user")
+      return
+    }
+
+    console.log("User created, now fetching messages")
+
+    const fetchRes = await fetch("/api/messages/get", {
+      method: "POST",
+      body: JSON.stringify({ anonToken }),
+      headers: { "Content-Type": "application/json" },
+    })
+
+    if (fetchRes.ok) {
+      const data = await fetchRes.json()
+      console.log("Loaded messages:", data)
+
+      if (data.length === 0) {
+        setMessages([
+          {
+            id: 1,
+            content: "Hello, feel free to share whatever is on your mind.",
+            fromAdmin: true,
+          },
+        ])
+      } else {
+        setMessages(data)
+      }
+    } else {
+      console.error("Failed to load messages")
+    }
+  }
+
+  initChat()
+}, [anonToken]) 
+
+ const handleSend = async () => {
+  if (!input.trim()) return
+
+  const newMessage: ChatMessage = {
     id: Date.now(),
     content: input,
-    fromAdmin: false,
-  };
-
-  // Update local UI immediately
-  setMessages([...messages, newMessage]);
-  setInput("");
-
-  // Send to backend
-  try {
-    await fetch('/api/messages', {
-      method: 'POST',
-      body: JSON.stringify({ anonToken, content: input }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    console.log('Message sent to backend');
-  } catch (err) {
-    console.error('Failed to send message:', err);
+    fromAdmin: isAdmin  // This was the key change - use isAdmin instead of hardcoded false
   }
-};
+
+  setMessages((prev) => [...prev, newMessage])
+  setInput("")
+
+  try {
+    console.log("Sending message:", input, "fromAdmin:", isAdmin)
+
+    await fetch("/api/messages", {
+      method: "POST",
+      body: JSON.stringify({
+        anonToken,
+        content: input,
+        fromAdmin: isAdmin  // Also send this to your API
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+
+    console.log("Message sent")
+  } catch (err) {
+    console.error("Failed to send message:", err)
+  }
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex items-center justify-center px-4 py-12">
@@ -55,10 +122,7 @@ const handleSend = async () => {
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex ${msg.fromAdmin ? "justify-start" : "justify-end"}`}
-            >
+            <div key={msg.id} className={`flex ${msg.fromAdmin ? "justify-start" : "justify-end"}`}>
               <div
                 className={`max-w-[70%] px-4 py-2 rounded-2xl shadow-sm text-sm leading-relaxed 
                   ${msg.fromAdmin ? "bg-pink-100 text-gray-700" : "bg-pink-500 text-white"}`}
@@ -88,5 +152,5 @@ const handleSend = async () => {
         </div>
       </div>
     </div>
-  );
+  )
 }

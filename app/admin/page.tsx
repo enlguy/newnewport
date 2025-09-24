@@ -1,37 +1,23 @@
-'use client'
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+import AdminDashboard from "./AdminDashboard"
+import LogoutButton from "@/app/components/LogoutButton"
 
-export default function AdminPage() {
-  const [users, setUsers] = useState([])
+export default async function AdminPage() {
+  const cookieStore = await cookies() // ✅ Made async and awaited
+  const isAdmin = cookieStore.get("isAdmin")?.value === "true"
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-      const res = await fetch('/api/admin/users')
-      if (!res.ok) throw new Error('Failed to fetch users')
-      const data = await res.json()
-      setUsers(data)
-      } catch (err) {
-      console.error('Error loading users:', err)
-      }
-    }
-
-    fetchUsers()
-  }, [])
+  if (!isAdmin) {
+    redirect("/admin/login")
+  }
 
   return (
     <div>
-      <h1>Admin Dashboard</h1>
-      <ul>
-        {users.map((user: any) => (
-          <li key={user.anon_token}>
-            <Link href={`/free-services/chat/${user.anon_token}`}>
-              Visitor {user.anon_token.slice(0, 8)}... → Last message: {user.latest_message}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="flex justify-between items-center p-4 bg-gray-100 border-b">
+        <h1 className="text-xl font-bold">Admin Dashboard</h1>
+        <LogoutButton />
+      </div>
+      <AdminDashboard />
     </div>
   )
 }
