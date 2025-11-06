@@ -9,6 +9,12 @@ type ChatMessage = {
   fromAdmin: boolean
 }
 
+interface GrecaptchaWindow extends Window {
+  grecaptcha?: {
+    getResponse: () => string
+  }
+}
+
 export default function ChatPage() {
   const { anonToken } = useParams()
   const router = useRouter()
@@ -81,7 +87,7 @@ export default function ChatPage() {
   const handleSend = async () => {
     if (!input.trim()) return
 
-    const captchaToken = (window as any).grecaptcha?.getResponse()
+    const captchaToken = (window as GrecaptchaWindow).grecaptcha?.getResponse()
     if (!captchaToken) {
       alert("Please complete the CAPTCHA")
       return
