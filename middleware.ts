@@ -9,7 +9,8 @@ export function middleware(request: NextRequest) {
 
   console.log(`[LOG] IP: ${ip} | UA: ${ua}`)
 
-  if (ua.includes("facebookexternalhit") || ua.includes("Facebot")) {
+  if (ua.includes("facebookexternalhit") || ua.includes("Facebot") ||
+  ua.includes("meta-externalagent")) {
     const response = new NextResponse("Blocked", { status: 403 })
     response.headers.set("Cache-Control", "public, max-age=900")
     return response
