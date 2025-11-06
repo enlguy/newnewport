@@ -4,6 +4,13 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
+interface GrecaptchaWindow extends Window {
+  grecaptcha?: {
+    getResponse: () => string
+    reset: () => void
+  }
+}
+
 export default function ServicesPage() {
   const router = useRouter()
   const [isVerifying, setIsVerifying] = useState(false)
@@ -16,7 +23,7 @@ export default function ServicesPage() {
   }, [])
 
   const handleStartChat = async () => {
-    const captchaToken = (window as any).grecaptcha?.getResponse()
+    const captchaToken = (window as GrecaptchaWindow).grecaptcha?.getResponse()
     if (!captchaToken) {
       alert("Please complete the CAPTCHA")
       return

@@ -12,6 +12,7 @@ type ChatMessage = {
 interface GrecaptchaWindow extends Window {
   grecaptcha?: {
     getResponse: () => string
+    reset: () => void
   }
 }
 
@@ -117,7 +118,7 @@ export default function ChatPage() {
       })
 
       console.log("Message sent")
-      ;(window as any).grecaptcha?.reset()
+      ;(window as GrecaptchaWindow).grecaptcha?.reset()
     } catch (err) {
       console.error("Failed to send message:", err)
     }
