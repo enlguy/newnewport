@@ -1,7 +1,8 @@
 import { promises as fs } from "fs";
 import path from "path";
 import ReactMarkdown from 'react-markdown';
-import BlogNavBar from '../../components/BlogHeader'
+import BlogNavBar from '../../components/BlogHeader';
+import matter from "gray-matter";
 
 // Define the props type for the component
 type BlogPostPageProps = {
@@ -26,14 +27,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const filePath = path.join(process.cwd(), '_posts', `${slug}.md`);
   const fileContents = await fs.readFile(filePath, 'utf8');
 
+  const { data, content } = matter(fileContents);
+  const title = data.title || slug.replace(/-/g, ' ');
+  const subtitle = data.subtitle;
+
   return (
     <div>
       <BlogNavBar />
       <div className="pt-24 px-4 max-w-4xl mx-auto">
-        <h1 className="text-black text-3xl font-bold mb-8 text-center capitalize">
-          {slug.replace(/-/g, ' ')}
+        <h1 className="text-black text-3xl font-bold mb-8 text-center">
+          {title}
         </h1>
-        
+        {subtitle && (
+      <p className="text-gray-800 text-extrabold text-lg text-center mb-8">
+        {subtitle}
+      </p>
+        )}
         <article className="prose prose-lg max-w-none">
           <ReactMarkdown
             components={{
@@ -64,7 +73,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               ),
             }}
           >
-            {fileContents}
+            {content}
           </ReactMarkdown>
         </article>
       </div>

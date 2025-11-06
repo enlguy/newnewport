@@ -3,6 +3,7 @@ import Link from "next/link";
 import { promises as fs } from "fs";
 import path from "path";
 import BlogNavBar from "../components/BlogHeader";
+import matter from "gray-matter";
 
 // This function will run on the server to get posts
 async function getPosts() {
@@ -10,23 +11,23 @@ async function getPosts() {
   
   try {
     const filenames = await fs.readdir(postsDirectory);
-    const posts = filenames
-      .filter(filename => filename.endsWith('.md'))
-      .map((filename, index) => {
-        const slug = filename.replace(/\.md$/, '');
-        // Create a title from the slug (you can enhance this later with front matter)
-        const title = slug
-          .split('-')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(' ');
-        
-        return {
-          id: index + 1,
-          title,
-          slug,
-          // You can add excerpt, date, etc. later
-        };
-      });
+    const posts = await Promise.all(
+      filenames
+        .filter(filename => filename.endsWith('.md'))
+        .map(async (filename, index) => {
+          const slug = filename.replace(/\.md$/, '');
+          const filePath = path.join(postsDirectory, filename);
+          const fileContents = await fs.readFile(filePath, 'utf8');
+          const { data } = matter(fileContents);
+
+          return {
+            id: index + 1,
+            title: data.title || slug.replace(/-/g, ' '),
+            slug,
+            // You can add excerpt, date, etc. from frontmatter here
+          };
+        })
+    );
     
     return posts;
   } catch (error) {

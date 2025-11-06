@@ -122,7 +122,7 @@ function NavBar() {
                     Paid Services
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     href="/free-services"
                     className="cursor-pointer ${
@@ -131,7 +131,7 @@ function NavBar() {
                   >
                     Free Services
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <ScrollLink
                     to="about"
