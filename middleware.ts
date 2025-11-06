@@ -3,9 +3,16 @@ import type { NextRequest } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
 
 export function middleware(request: NextRequest) {
+  const ua = request.headers.get("user-agent") || ""
+
+  // 🛑 Block Meta crawlers
+  if (ua.includes("facebookexternalhit") || ua.includes("Facebot")) {
+    return new NextResponse("Blocked", { status: 403 })
+  }
+
+  // ✅ Check for anon_token cookie
   const cookie = request.cookies.get('anon_token')
 
-  // Only redirect if the cookie is missing
   if (!cookie) {
     const token = uuidv4()
     console.log('Redirecting to:', token)
@@ -22,26 +29,10 @@ export function middleware(request: NextRequest) {
     return response
   }
 
+  // ✅ Let request through if cookie exists
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/free-services/chat/:path*'], 
-}
-
-
-/* import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-
-export function middleware(request: NextRequest) {
-  const forwarded = request.headers.get('x-forwarded-for')
-  const ip = forwarded?.split(',')[0]?.trim() || 'unknown'
-
-  console.log("Incoming request from IP:", ip)
-
-  return new Response("Chat is temporarily offline for maintenance.", { status: 503 })
-}
-
-export const config = {
   matcher: ['/free-services/chat/:path*'],
-} */
+}
