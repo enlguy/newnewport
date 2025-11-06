@@ -2,10 +2,24 @@ import { NextRequest, NextResponse } from 'next/server'
 import { pool } from '@/lib/db'
 
 export async function POST(req: NextRequest) {
-  console.log('Route hit: /api/messages/get')
+  console.log('Route hit: /api/messages')
 
-  const { anonToken, content, fromAdmin = false } = await req.json()
+  const { anonToken, content, fromAdmin = false, captchaToken } = await req.json()
   console.log('Incoming message:', { anonToken, content, fromAdmin })
+
+  // ✅ Verify CAPTCHA
+  const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${captchaToken}`,
+  })
+
+  const data = await verifyRes.json()
+
+  if (!data.success) {
+    console.warn("CAPTCHA verification failed:", data)
+    return NextResponse.json({ error: "CAPTCHA verification failed" }, { status: 403 })
+  }
 
   const client = await pool.connect()
 

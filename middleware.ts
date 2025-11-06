@@ -1,4 +1,4 @@
-/* import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -28,9 +28,9 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: ['/free-services/chat/:path*'], 
 }
- */
 
-import { NextResponse } from 'next/server'
+
+/* import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
@@ -44,4 +44,4 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: ['/free-services/chat/:path*'],
-}
+} */

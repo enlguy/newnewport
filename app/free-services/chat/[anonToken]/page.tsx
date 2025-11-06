@@ -18,11 +18,10 @@ export default function ChatPage() {
   const [input, setInput] = useState("")
 
   useEffect(() => {
-  const urlParams = new URLSearchParams(window.location.search)
-  setIsAdmin(urlParams.get('admin') === 'true')
+    const urlParams = new URLSearchParams(window.location.search)
+    setIsAdmin(urlParams.get("admin") === "true")
   }, [])
 
-  // Redirect if no token
   useEffect(() => {
     if (!anonToken) {
       const newToken = crypto.randomUUID()
@@ -31,85 +30,92 @@ export default function ChatPage() {
     }
   }, [anonToken])
 
-  // Create user + load messages
- useEffect(() => { 
-  const initChat = async () => {
-    if (!anonToken) return
+  useEffect(() => {
+    const initChat = async () => {
+      if (!anonToken) return
 
-    console.log("Creating user with token:", anonToken)
+      console.log("Creating user with token:", anonToken)
 
-    const createRes = await fetch("/api/users/create", {
-      method: "POST",
-      body: JSON.stringify({ anonToken }),
-      headers: { "Content-Type": "application/json" },
-    })
+      const createRes = await fetch("/api/users/create", {
+        method: "POST",
+        body: JSON.stringify({ anonToken }),
+        headers: { "Content-Type": "application/json" },
+      })
 
-    if (!createRes.ok) {
-      console.error("Failed to create user")
+      if (!createRes.ok) {
+        console.error("Failed to create user")
+        return
+      }
+
+      console.log("User created, now fetching messages")
+
+      const fetchRes = await fetch("/api/messages/get", {
+        method: "POST",
+        body: JSON.stringify({ anonToken }),
+        headers: { "Content-Type": "application/json" },
+      })
+
+      if (fetchRes.ok) {
+        const data = await fetchRes.json()
+        console.log("Loaded messages:", data)
+
+        if (data.length === 0) {
+          setMessages([
+            {
+              id: 1,
+              content: "Hello, feel free to share whatever is on your mind.",
+              fromAdmin: true,
+            },
+          ])
+        } else {
+          setMessages(data)
+        }
+      } else {
+        console.error("Failed to load messages")
+      }
+    }
+
+    initChat()
+  }, [anonToken])
+
+  const handleSend = async () => {
+    if (!input.trim()) return
+
+    const captchaToken = (window as any).grecaptcha?.getResponse()
+    if (!captchaToken) {
+      alert("Please complete the CAPTCHA")
       return
     }
 
-    console.log("User created, now fetching messages")
+    const newMessage: ChatMessage = {
+      id: Date.now(),
+      content: input,
+      fromAdmin: isAdmin,
+    }
 
-    const fetchRes = await fetch("/api/messages/get", {
-      method: "POST",
-      body: JSON.stringify({ anonToken }),
-      headers: { "Content-Type": "application/json" },
-    })
+    setMessages((prev) => [...prev, newMessage])
+    setInput("")
 
-    if (fetchRes.ok) {
-      const data = await fetchRes.json()
-      console.log("Loaded messages:", data)
+    try {
+      console.log("Sending message:", input, "fromAdmin:", isAdmin)
 
-      if (data.length === 0) {
-        setMessages([
-          {
-            id: 1,
-            content: "Hello, feel free to share whatever is on your mind.",
-            fromAdmin: true,
-          },
-        ])
-      } else {
-        setMessages(data)
-      }
-    } else {
-      console.error("Failed to load messages")
+      await fetch("/api/messages", {
+        method: "POST",
+        body: JSON.stringify({
+          anonToken,
+          content: input,
+          fromAdmin: isAdmin,
+          captchaToken,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
+
+      console.log("Message sent")
+      ;(window as any).grecaptcha?.reset()
+    } catch (err) {
+      console.error("Failed to send message:", err)
     }
   }
-
-  initChat()
-}, [anonToken]) 
-
- const handleSend = async () => {
-  if (!input.trim()) return
-
-  const newMessage: ChatMessage = {
-    id: Date.now(),
-    content: input,
-    fromAdmin: isAdmin  // This was the key change - use isAdmin instead of hardcoded false
-  }
-
-  setMessages((prev) => [...prev, newMessage])
-  setInput("")
-
-  try {
-    console.log("Sending message:", input, "fromAdmin:", isAdmin)
-
-    await fetch("/api/messages", {
-      method: "POST",
-      body: JSON.stringify({
-        anonToken,
-        content: input,
-        fromAdmin: isAdmin  // Also send this to your API
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
-
-    console.log("Message sent")
-  } catch (err) {
-    console.error("Failed to send message:", err)
-  }
-}
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex items-center justify-center px-4 py-12">
@@ -134,21 +140,24 @@ export default function ChatPage() {
         </div>
 
         {/* Input */}
-        <div className="p-4 border-t border-pink-100 flex gap-2">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            placeholder="Type your message..."
-            className="flex-1 rounded-xl border border-pink-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
-          />
-          <button
-            onClick={handleSend}
-            className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-xl shadow"
-          >
-            Send
-          </button>
+        <div className="p-4 border-t border-pink-100 flex flex-col gap-4">
+
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              placeholder="Type your message..."
+              className="flex-1 rounded-xl border border-pink-200 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
+            />
+            <button
+              onClick={handleSend}
+              className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-xl shadow"
+            >
+              Send
+            </button>
+          </div>
         </div>
       </div>
     </div>
