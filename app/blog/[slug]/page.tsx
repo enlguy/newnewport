@@ -47,6 +47,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <ReactMarkdown
             components={{
               // Style paragraphs
+              a: ({ href, children }) => (
+              <a
+              href={href}
+              className="text-blue-600 hover:text-blue-800 font-semibold underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              >
+              {children}
+              </a>
+              ), 
               p: ({ children }) => (
                 <p className="text-gray-700 leading-relaxed mb-6">
                   {children}
