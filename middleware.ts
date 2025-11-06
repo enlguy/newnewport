@@ -4,10 +4,15 @@ import { v4 as uuidv4 } from 'uuid'
 
 export function middleware(request: NextRequest) {
   const ua = request.headers.get("user-agent") || ""
+  const forwarded = request.headers.get("x-forwarded-for")
+  const ip = forwarded?.split(",")[0]?.trim() || "unknown"
 
-  // 🛑 Block Meta crawlers
+  console.log(`[LOG] IP: ${ip} | UA: ${ua}`)
+
   if (ua.includes("facebookexternalhit") || ua.includes("Facebot")) {
-    return new NextResponse("Blocked", { status: 403 })
+    const response = new NextResponse("Blocked", { status: 403 })
+    response.headers.set("Cache-Control", "public, max-age=900")
+    return response
   }
 
   // ✅ Check for anon_token cookie
