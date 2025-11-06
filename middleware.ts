@@ -34,6 +34,11 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
+  const forwarded = request.headers.get('x-forwarded-for')
+  const ip = forwarded?.split(',')[0]?.trim() || 'unknown'
+
+  console.log("Incoming request from IP:", ip)
+
   return new Response("Chat is temporarily offline for maintenance.", { status: 503 })
 }
 
