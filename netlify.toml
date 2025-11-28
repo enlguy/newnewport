@@ -12,3 +12,7 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[edge_functions]]
+function = "block-crawler"
+path = "/free-services"
