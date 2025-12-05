@@ -14,5 +14,9 @@ status = 200
 package = "@netlify/plugin-nextjs"
 
 [[edge_functions]]
-function = "block-crawler" # Use the exact filename without extension
+function = "block-crawler"
 path = "/*"
+
+[[edge_functions]]
+function = "crawlertrap"
+path = "/chat/:splat"
