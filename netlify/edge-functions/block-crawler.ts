@@ -11,10 +11,12 @@ function isProblematicIP(ip: string): boolean {
 }
 
 export default async (request: Request, context: Context) => {
-  console.log("--- Edge Function Running ---");
   const userAgent = request.headers.get('user-agent') || '';
   const referer = request.headers.get('referer') || '';
   const clientIP = request.headers.get('x-nf-client-connection-ip') || '';
+
+  const requestedURL = new URL(request.url).pathname;
+  console.log(`BLOCKED CRAWLER (Multi-Layer): PATH=${requestedURL}, IP=${clientIP}, UA=${userAgent}, REFERER=${referer}`);
   
   // List of known aggressive bot strings (use all lowercase for case-insensitive checking)
   const aggressiveBots = [
@@ -36,9 +38,7 @@ export default async (request: Request, context: Context) => {
   ) || isProblematicIP(clientIP) || isBadReferer;
 
   if (isBlockedBot) {
-    const requestedURL = new URL(request.url).pathname;
-
-    console.log(`BLOCKED CRAWLER (Multi-Layer): PATH=${requestedURL}, IP=${clientIP}, UA=${userAgent}, REFERER=${referer}`);
+    console.log(`--- BLOCKED SUCCESS: ${requestedURL} ---`);
     return new Response(null, { 
       status: 403, 
       statusText: "Access Denied by Security Filter"
