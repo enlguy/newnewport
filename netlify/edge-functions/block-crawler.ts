@@ -13,6 +13,8 @@ function isProblematicIP(ip: string): boolean {
 export default async (request: Request, context: Context) => {
   // Get the User-Agent header, setting it to an empty string if missing
   const userAgent = request.headers.get('user-agent') || '';
+  const referer = request.headers.get('referer') || '';
+  const clientIP = request.headers.get('x-nf-client-connection-ip') || '';
   
   // List of known aggressive bot strings (use all lowercase for case-insensitive checking)
   const aggressiveBots = [
@@ -23,23 +25,23 @@ export default async (request: Request, context: Context) => {
     'claude-bot',
     'perplexitybot',
     'bytespider',
-    // Add any specific user-agent strings you found in your logs here
   ]; 
 
-  // **CRITICAL FIX:** Use .some() to check if ANY item in the array is included in the userAgent string.
+  const isBadReferer = referer.toLowerCase().includes('facebook.com') || 
+                       referer.toLowerCase().includes('instagram.com') ||
+                       referer.toLowerCase().includes('fb.me');
+
   const isBlockedBot = aggressiveBots.some(botString => 
     userAgent.toLowerCase().includes(botString.toLowerCase())
-  );
+  ) || isProblematicIP(clientIP) || isBadReferer;
 
   if (isBlockedBot) {
-    // Immediate 403 Forbidden response at the network edge
+    console.log(`BLOCKED CRAWLER (Multi-Layer): IP=${clientIP}, UA=${userAgent}, REFERER=${referer}`);
     return new Response(null, { 
       status: 403, 
       statusText: "Access Denied by Security Filter"
     });
   }
 
-  // If the agent is clean, allow the request to proceed to your site/function
-  // Use context.next() if you are chaining functions or just return to pass through
   return context.next();
 };
