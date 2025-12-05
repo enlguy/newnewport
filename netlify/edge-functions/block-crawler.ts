@@ -20,6 +20,7 @@ export default async (request: Request, context: Context) => {
   
   // List of known aggressive bot strings (use all lowercase for case-insensitive checking)
   const aggressiveBots = [
+    'HeadlessChrome',
     'meta-externalagent',
     'meta-webindexer/1.1',
     'facebookexternalhit',

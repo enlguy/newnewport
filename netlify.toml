@@ -16,7 +16,3 @@ package = "@netlify/plugin-nextjs"
 [[edge_functions]]
 function = "block-crawler"
 path = "/*"
-
-[[edge_functions]]
-function = "crawlertrap"
-path = "/chat/:splat"
