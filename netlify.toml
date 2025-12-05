@@ -1,18 +1,20 @@
+# Keep your existing build and plugin settings
 [build.environment]
-  DISABLE_ESLINT_PLUGIN = "true"
+  DISABLE_ESLINT_PLUGIN = "true"
 
 [build]
-  command = "npm run build"
-  publish = ".next"
-  
+  command = "npm run build"
+  publish = ".next"
+  
 [[redirects]]
- from = "/*"
- to = "/index.html"
- status = 200
+ from = "/*"
+ to = "/index.html"
+ status = 200
 
 [[plugins]]
-  package = "@netlify/plugin-nextjs"
+  package = "@netlify/plugin-nextjs"
 
+# CHANGE THE PATH TO "/*" to apply the block everywhere
 [[edge_functions]]
-function = "block-crawler"
-path = "/free-services"
+function = "block-crawler" # Use the exact filename without extension
+path = "/*"              
