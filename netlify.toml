@@ -4,7 +4,7 @@ DISABLE_ESLINT_PLUGIN = "true"
 [build]
 command = "npm run build"
 publish = ".next"
-  
+
 [[redirects]]
 from = "/*"
 to = "/index.html"
@@ -15,4 +15,4 @@ package = "@netlify/plugin-nextjs"
 
 [[edge_functions]]
 function = "block-crawler" # Use the exact filename without extension
-path = "/*"              
+path = "/*"
