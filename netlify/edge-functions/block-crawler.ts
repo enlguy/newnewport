@@ -1,7 +1,14 @@
-// netlify/edge-functions/block-bots.js
-
-// Using Netlify's standard Edge Function import
 import type { Context } from "https://edge.netlify.com/";
+
+function isProblematicIP(ip: string): boolean {
+  const ipPrefixes = [
+        '57.141.0.', 
+        '57.141.2.', 
+        '57.141.6.', 
+    ];
+
+    return ipPrefixes.some(prefix => ip.startsWith(prefix));
+}
 
 export default async (request: Request, context: Context) => {
   // Get the User-Agent header, setting it to an empty string if missing
