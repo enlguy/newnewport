@@ -36,7 +36,9 @@ export default async (request: Request, context: Context) => {
   ) || isProblematicIP(clientIP) || isBadReferer;
 
   if (isBlockedBot) {
-    console.log(`BLOCKED CRAWLER (Multi-Layer): IP=${clientIP}, UA=${userAgent}, REFERER=${referer}`);
+    const requestedURL = new URL(request.url).pathname;
+
+    console.log(`BLOCKED CRAWLER (Multi-Layer): PATH=${requestedURL}, IP=${clientIP}, UA=${userAgent}, REFERER=${referer}`);
     return new Response(null, { 
       status: 403, 
       statusText: "Access Denied by Security Filter"
