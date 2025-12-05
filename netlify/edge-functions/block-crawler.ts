@@ -1,18 +1,37 @@
-// You can optionally import types for better safety, though not strictly required
+// netlify/edge-functions/block-bots.js
+
+// Using Netlify's standard Edge Function import
 import type { Context } from "https://edge.netlify.com/";
 
 export default async (request: Request, context: Context) => {
+  // Get the User-Agent header, setting it to an empty string if missing
   const userAgent = request.headers.get('user-agent') || '';
   
-  // *** CRITICAL: Replace 'BAD_META_USER_AGENT' with the exact string you found in your Vercel logs ***
-  const badCrawler = 'BAD_META_USER_AGENT'; 
+  // List of known aggressive bot strings (use all lowercase for case-insensitive checking)
+  const aggressiveBots = [
+    'meta-externalagent',
+    'facebookexternalhit',
+    'gptbot',
+    'claude-bot',
+    'perplexitybot',
+    'bytespider',
+    // Add any specific user-agent strings you found in your logs here
+  ]; 
 
-  // Check if the User-Agent header contains the identified malicious string
-  if (userAgent.includes(badCrawler)) {
+  // **CRITICAL FIX:** Use .some() to check if ANY item in the array is included in the userAgent string.
+  const isBlockedBot = aggressiveBots.some(botString => 
+    userAgent.toLowerCase().includes(botString.toLowerCase())
+  );
+
+  if (isBlockedBot) {
     // Immediate 403 Forbidden response at the network edge
-    return new Response('Access denied for security reasons.', { status: 403 });
+    return new Response(null, { 
+      status: 403, 
+      statusText: "Access Denied by Security Filter"
+    });
   }
 
-  // If the agent is clean, allow the request to proceed to your Next.js function
+  // If the agent is clean, allow the request to proceed to your site/function
+  // Use context.next() if you are chaining functions or just return to pass through
   return context.next();
 };
