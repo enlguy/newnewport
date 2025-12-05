@@ -11,7 +11,7 @@ function isProblematicIP(ip: string): boolean {
 }
 
 export default async (request: Request, context: Context) => {
-  // Get the User-Agent header, setting it to an empty string if missing
+  console.log("--- Edge Function Running ---");
   const userAgent = request.headers.get('user-agent') || '';
   const referer = request.headers.get('referer') || '';
   const clientIP = request.headers.get('x-nf-client-connection-ip') || '';
