@@ -1,6 +1,6 @@
 # Keep your existing build and plugin settings
 [build.environment]
-  DISABLE_ESLINT_PLUGIN = "true"
+ DISABLE_ESLINT_PLUGIN = "true"
 
 [build]
   command = "npm run build"
