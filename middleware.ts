@@ -2,12 +2,34 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
 
+const AGGRESSIVE_BOTS = [
+  "facebookexternalhit",
+  "Facebot",
+  "meta-externalagent",
+  "meta-webindexer/1.1", 
+  "HeadlessChrome",      
+  "node",          
+];
+
 export function middleware(request: NextRequest) {
   const ua = request.headers.get("user-agent") || ""
   const forwarded = request.headers.get("x-forwarded-for")
   const ip = forwarded?.split(",")[0]?.trim() || "unknown"
 
   console.log(`[LOG] IP: ${ip} | UA: ${ua}`)
+
+  const isBlockedBot = AGGRESSIVE_BOTS.some(botString =>
+    ua.includes(botString)
+  );
+
+  if (isBlockedBot) {
+    console.log(`MIDDLEWARE BLOCK: Blocking aggressive UA: ${ua}`);
+    
+    // Returning a 403 Forbidden stops the request immediately.
+    const response = new NextResponse("Blocked", { status: 403 });
+    response.headers.set("Cache-Control", "public, max-age=900");
+    return response;
+  }
 
   if (ua.includes("facebookexternalhit") || ua.includes("Facebot") ||
   ua.includes("meta-externalagent")) {
@@ -16,7 +38,6 @@ export function middleware(request: NextRequest) {
     return response
   }
 
-  // ✅ Check for anon_token cookie
   const cookie = request.cookies.get('anon_token')
 
   if (!cookie) {
