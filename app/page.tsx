@@ -5,6 +5,8 @@ import Hero from "./components/Hero";
 import NewProjects from "./components/NewProjects";
 import TechStackGalaxy from "./components/TechStackGalaxy";
 
+export const dynamic = "force-dynamic"
+
 export default function Home() {
   return (
     <>
