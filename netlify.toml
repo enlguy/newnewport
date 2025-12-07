@@ -31,10 +31,9 @@ publish = ".next"
 # ---------------------------------------------------------
 # Catch-all fallback for client-side routed pages
 # ---------------------------------------------------------
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# [[redirects]]
+#  to = "/index.html"
+# status = 200
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
