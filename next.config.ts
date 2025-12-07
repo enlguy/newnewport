@@ -1,10 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Force Next.js to generate the image optimizer properly
   images: {
-    unoptimized: false,
-    loader: "default",
+    unoptimized: true,
   },
 
   webpack: (config, { isServer }) => {
