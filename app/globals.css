@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Using the suggested warm off-white for light mode */
+  --background: #F8F5F2; 
+  --foreground: #222222; /* Soft Charcoal */
+  
+  /* Brand Tokens */
+  --brand-terracotta: #D6693B;
+  --brand-rust: #BF582F;
+  --brand-teal: #3B7C82;
+  --brand-peach: #FBF0E8;
+  --brand-muted: #6B625E;
+  --brand-border: #D7CEC7;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  /* Adding the Custom Branding Colors */
+  --color-brand-terracotta: var(--brand-terracotta);
+  --color-brand-rust: var(--brand-rust);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-peach: var(--brand-peach);
+  --brand-muted: var(--brand-muted);
+  --brand-border: var(--brand-border);
+  --color-brand: var(--brand-terracotta);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-border: var(--brand-border);
+
+  /* Fonts */
+  --font-sans: "Inter", var(--font-geist-sans), ui-sans-serif, system-ui;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Slightly warmer dark mode than pure black to stay "cozy" */
+    --background: #1A1817; 
+    --foreground: #F8F5F2;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Use the variable defined in @theme */
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease;
+}
+.btn-primary {
+  @apply inline-flex items-center px-8 py-4 bg-brand text-background text-lg font-semibold rounded-2xl hover:bg-brand-rust transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1;
 }

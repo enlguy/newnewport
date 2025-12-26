@@ -1,9 +1,11 @@
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Header from "./components/Header";
+import AboutTeaser from "./components/AboutTeaser";
+import FinalCTABand from "./components/FinalCTABand";
+import Header from "./components/NavBar";
 import Hero from "./components/Hero";
-import NewProjects from "./components/NewProjects";
-import TechStackGalaxy from "./components/TechStackGalaxy";
+import IndividualBand from "./components/IndividualBand";
+import BusinessBand from "./components/BusinessBand";
+import ServiceCards from "./components/ServiceCards";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -11,19 +13,23 @@ export default function Home() {
       <Header />
       <div id="hero">
         <Hero />
-      </div>
+       </div>
       <div id="tech">
-        <TechStackGalaxy />
+        <ServiceCards />
       </div>
       <div id="projects">
-        <NewProjects />
+        <BusinessBand />
       </div>
-      <div id="about">
-        <About />
+      <div id="projects">
+        <IndividualBand />
       </div>
-      <div id="contact">
-        <Contact />
+      <div id="aboutteaser">
+        <AboutTeaser />
       </div>
+      <div id="cta">
+        <FinalCTABand />
+      </div>
+      <Footer />
     </>
   );
 }

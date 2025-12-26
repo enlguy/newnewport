@@ -1,78 +1,50 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Bad_Script } from "next/font/google";
+import React from 'react';
 
-const script = Bad_Script({
-  variable: "--bad-script-regular",
-  subsets: ["latin"],
-  weight: "400",
-});
-
-const Hero = () => {
+export default function Hero() {
   return (
-    <div className="h-full bg-linear-to-t from-[#140256] to-[#040029]">
-      <div className="h-screen grid md:grid-cols-2 items-center md:gap-4 gap-8 max-w-[1100px] max-md:max-w-md mx-auto">
-        <Image
-          src="/ChatGPTme1.png"
-          alt="hero image"
-          className="w-full h-full md:object-contain pr-20"
-          width={425}
-          height={650}
-        />
-
-        <div className="max-md:order-1 max-md:text-center">
-          <div className="text-[white] text-2xl font-medium md:text-5xl md:leading-10 mb-15">
-            <div className={script.className}>A Digital Man of Mystery</div>
+    <section className="bg-brand-bg py-3 md:py-20 px-10 min-h-[70vh] flex items-center">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-24 items-center">
+        
+        {/* Left Column: The Hook */}
+        <div>
+          <span className="text-brand-terracotta font-semibold tracking-wide uppercase text-sm">
+            Jack Epner • From Vail, CO • living globally
+          </span>
+          <h1 className="text-4xl md:text-5xl font-bold text-brand-charcoal mt-4 mb-6 leading-tight">
+            Helping businesses, learners, and pets thrive.
+          </h1>
+          <p className="text-lg text-brand-muted mb-8 leading-relaxed max-w-lg">
+            I’ve led RevOps initiatives with the C-Suite, taught at a university, and built full stack web solutions.
+              I've also cared for pets and homes across many countries, and made feature films. 
+            Now, I partner with businesses and individuals to solve practical 
+            problems with empathy and technology.
+          </p>
+          
+          <div className="flex flex-wrap gap-4">
+            <a href="/business-services" className="cursor-pointer px-8 py-4 bg-brand-terracotta text-white rounded-xl font-semibold text-lg shadow-md hover:bg-brand-rust hover:shadow-lg transition-all duration-200">
+              For Businesses
+            </a>
+            <a href="/individual-services" className="px-8 py-4 bg-brand-terracotta text-white rounded-xl font-semibold text-lg shadow-md hover:bg-brand-rust hover:shadow-lg transition-all duration-200">
+              For Individuals
+            </a>
+            <a href="/about" className="text-lg bg-white border border-brand-border text-brand hover:bg-brand-muted px-6 py-3 rounded-xl hover:border-brand-terracotta font-medium transition-all duration-200">
+              About Me
+            </a>
           </div>
-          <ul className="mt-4 text-sm text-[#12c5f7] leading-relaxed space-y-[1.5]">
-            <li className="list-disc">I have lived in 15 countries</li>
-            <li className="list-disc">
-              I have worked in{" "}
-              <span className="underline">
-                <Link
-                  href="https://www.imdb.com/name/nm4821772/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {" "}
-                  film/TV{" "}
-                </Link>
-              </span>
-            </li>
-            <li className="list-disc">
-              I have worked on marketing projects for the World Cup
-            </li>
-            <li className="list-disc">
-              I sometimes make{" "}
-              <span className="underline">
-                <Link
-                  href="https://soundcloud.com/tsearcher"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  music
-                </Link>
-              </span>
-            </li>
-            <li className="list-disc">I have taught university courses</li>
-          </ul>
-          <Link
-            href="https://github.com/enlguy?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button
-              type="button"
-              className="px-5 py-2.5 mt-10 cursor-pointer rounded text-[15px] font-medium outline-none tracking-wide bg-[#0484d4] text-white hover:bg-blue-700"
-            >
-              Check out my latest project
-            </button>
-          </Link>
         </div>
-      </div>
-    </div>
-  );
-};
 
-export default Hero;
+        {/* Right Column: The Visual Representative */}
+        <div className="relative">
+          <div className="aspect-square rounded-3xl bg-brand-border/30 overflow-hidden shadow-inner relative group flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-tr from-brand-terracotta/10 to-transparent"></div>
+            <img 
+      src="/me.webp"
+      alt="Jack Epner - Professional Educator and Caretaker"
+      className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+    />
+           </div>
+          </div>
+        </div>
+    </section>
+  );
+}
