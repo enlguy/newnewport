@@ -14,7 +14,7 @@ export default function TutoringPage() {
               Master the Subject. <br />Build the Confidence.
             </h1>
             <p className="text-xl lg:text-2xl text-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Seven years of global teaching experience distilled into 1-on-1 sessions. From Ivy League hopefuls to students who just need a win—I help you find your "click" moment.
+              Seven years of global teaching experience distilled into 1-on-1 sessions. From Ivy League hopefuls to students who just need a win—I help you find your &quot;click&quot; moment.
             </p>
             <div className="bg-brand-peach/30 rounded-2xl p-6 mb-8 max-w-md mx-auto border border-brand-peach/50">
               <p className="text-lg font-semibold text-brand mb-1">Real Growth, Quantified</p>

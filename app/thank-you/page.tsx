@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ThankYou() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center py-12 px-4">
@@ -9,9 +11,9 @@ export default function ThankYou() {
         <p className="text-lg text-brand-muted mb-8">
           Got your message. Reply coming within 24 hours.
         </p>
-        <a href="/" className="px-8 py-4 bg-brand-terracotta text-white rounded-xl font-semibold shadow-md hover:bg-brand-rust transition-all">
+        <Link href="/" className="px-8 py-4 bg-brand-terracotta text-white rounded-xl font-semibold shadow-md hover:bg-brand-rust transition-all">
           Back to home
-        </a>
+        </Link>
       </div>
     </div>
   );

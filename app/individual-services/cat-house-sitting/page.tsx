@@ -44,7 +44,7 @@ export default function HouseSittingPage() {
               <h3 className="text-2xl font-semibold text-brand mb-4">Property Security</h3>
               <p className="text-lg text-foreground/80">
                 A live-in presence is the best security. I handle mail, package reception, plant care, and general maintenance while 
-                ensuring your home looks lived-in and remains secure while you're abroad.
+                ensuring your home looks lived-in and remains secure while you&apos;re abroad.
               </p>
             </div>
 
@@ -66,7 +66,7 @@ export default function HouseSittingPage() {
           <h2 className="text-3xl font-bold mb-6">Wherever You Are, I Can Be There</h2>
           <p className="text-xl text-foreground/80 mb-12">
             I work with clients globally. If you are planning an extended trip and need a mature, 
-            professional person to look after your home and furry loved ones, let's talk.
+            professional person to look after your home and furry loved ones, let&apos;s talk.
           </p>
           <div className="bg-background/60 p-8 rounded-3xl border border-brand-peach/30 inline-block">
              <p className="text-lg font-medium text-brand-rust">Excellent global references available upon request</p>

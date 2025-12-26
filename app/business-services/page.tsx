@@ -42,7 +42,7 @@ export default function BusinessServices() {
                 What growing businesses need
               </h2>
               <p className="text-xl text-brand-muted mb-8 leading-relaxed max-w-lg">
-                Your tools don't talk to each other. Data is messy. Processes break at scale.
+                Your tools don&apos;t talk to each other. Data is messy. Processes break at scale.
               </p>
               <ul className="space-y-4 text-lg mb-12">
                 <li className="flex items-start gap-3">

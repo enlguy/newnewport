@@ -54,11 +54,11 @@ export default function ContactPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 bg-gradient-to-r from-brand to-brand-rust bg-clip-text text-transparent">
-              Let’s Start a Conversation
+              Let&apos;s Start a Conversation
             </h1>
             <p className="text-xl text-foreground/70">
-              Whether it's for your child's education or your home's security, 
-              I'm here to provide a reliable, professional solution.
+              Whether it&apos;s for your child&apos;s education or your home&apos;s security, 
+              I&apos;m here to provide a reliable, professional solution.
             </p>
           </div>
 
