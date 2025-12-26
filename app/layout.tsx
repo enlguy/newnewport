@@ -27,8 +27,8 @@ const script = Bad_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Project portfolio and intro for Jack Epner",
+  title: "My Offerings and Me",
+  description: "Personal site for Jack Epner",
 };
 
 export default function RootLayout({
