@@ -33,7 +33,7 @@ export default function AboutPage() {
           <p>
             If you looked at my resume, you&apos;d see two decades of seemingly different worlds: 
             <strong> RevOps, data architecture, and web development</strong> on one side; <strong>global education and estate caretaking</strong> on the other. 
-            To me, they're just different itches to scratch - one focused more on logic and creative problem-solving, the other on empathy and connection.
+            To me, they&apos;re just different itches to scratch - one focused more on logic and creative problem-solving, the other on empathy and connection.
           </p>
 
           <p>
@@ -115,7 +115,7 @@ export default function AboutPage() {
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-brand-peach/20 rounded-2xl flex items-center justify-center mx-auto text-2xl">✨</div>
               <h4 className="font-bold text-xl">High Standards</h4>
-              <p className="text-foreground/70 leading-relaxed">I value quality and honesty above all else. If I&apos;m involved, it's going to be done right.</p>
+              <p className="text-foreground/70 leading-relaxed">I value quality and honesty above all else. If I&apos;m involved, it&apos;s going to be done right.</p>
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ export default function AboutPage() {
       <section className="py-24 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="bg-brand-rust/5 rounded-[3rem] p-12 border border-brand-rust/10">
-            <h2 className="text-4xl font-bold mb-6">Let's talk.</h2>
+            <h2 className="text-4xl font-bold mb-6">Let&apos;s talk.</h2>
             <p className="text-xl text-foreground/70 mb-10 max-w-xl mx-auto">
               I&apos;m always open to new connections—whether you&apos;re looking for a partner 
               for your business or a guardian for your home.

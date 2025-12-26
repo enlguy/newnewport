@@ -68,7 +68,7 @@ export default function ContactPage() {
                 <div className="text-6xl mb-6">✉️</div>
                 <h2 className="text-3xl font-bold mb-4 text-foreground">Message Sent!</h2>
                 <p className="text-xl text-foreground/70 mb-8">
-                  Thanks for reaching out, {senderName}! I've received your details and will get back to you within 24 hours.
+                  Thanks for reaching out, {senderName}! I&apos;ve received your details and will get back to you within 24 hours.
                 </p>
                 <button 
                   onClick={() => setStatus('idle')}
