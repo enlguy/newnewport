@@ -8,7 +8,7 @@ export default function AboutTeaser() {
             Why I do this
           </h2>
           <p className="text-xl text-brand-muted mb-8 leading-relaxed max-w-3xl mx-auto">
-            I've lived in 16 countries across 4 continents, led sales teams through rapid growth, taught at university, 
+            I&apos;ve lived in 16 countries across 4 continents, led sales teams through rapid growth, taught at university, 
             produced feature films, and rescued animals. That global experience taught me adaptability, patience, 
             and how to solve real problems with practical solutions.
           </p>

@@ -21,8 +21,8 @@ export default function AboutPage() {
             not just on a screen.
           </h1>
           <p className="text-xl lg:text-2xl text-foreground/80 leading-relaxed max-w-2xl mx-auto italic">
-            "I believe the best work happens when we lead with empathy, 
-            stay curious, and remember that there’s a human—or an animal—at the heart of every project."
+            &quot;I believe the best work happens when we lead with empathy, 
+            stay curious, and remember that there&apos;s a human—or an animal—at the heart of every project.&quot;
           </p>
         </div>
       </section>
@@ -31,16 +31,16 @@ export default function AboutPage() {
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-lg text-foreground/80 leading-relaxed space-y-8">
           <p>
-            If you looked at my resume, you’d see two decades of seemingly different worlds: 
+            If you looked at my resume, you&apos;d see two decades of seemingly different worlds: 
             <strong> RevOps, data architecture, and web development</strong> on one side; <strong>global education and estate caretaking</strong> on the other. 
             To me, they're just different itches to scratch - one focused more on logic and creative problem-solving, the other on empathy and connection.
           </p>
 
           <p>
-            I’ve spent 12 years living abroad, settling into 16 different countries and 
-            traveling through dozens more. Those years didn’t just teach me how to navigate 
-            unfamiliar places; they taught me a lot about humanity. I’ve learned that whether 
-            I’m untangling a messy HubSpot portal or helping a student find their confidence 
+            I&apos;ve spent 12 years living abroad, settling into 16 different countries and 
+            traveling through dozens more. Those years didn&apos;t just teach me how to navigate 
+            unfamiliar places; they taught me a lot about humanity. I&apos;ve learned that whether 
+            I&apos;m untangling a messy HubSpot portal or helping a student find their confidence 
             in a difficult subject, the most important thing I can bring is <strong>my deep intuition.</strong>
           </p>
 
@@ -53,7 +53,7 @@ export default function AboutPage() {
 
           <div className="py-8">
             <blockquote className="border-l-4 border-brand-peach pl-6 italic text-2xl text-foreground/90 font-medium">
-              "I don't just build systems; I create breathing room for people to thrive."
+              &quot;I don&apos;t just build systems; I create breathing room for people to thrive.&quot;
             </blockquote>
           </div>
 
@@ -65,10 +65,10 @@ export default function AboutPage() {
           </p>
           
           <p>
-            I’ve lived a lot of life in 40+ countries, and it has left me with a 
+            I&apos;ve lived a lot of life in 40+ countries, and it has left me with a 
             mature, calm perspective. Whether you need a strategist, a teacher, 
-            or a guardian for your home, you’re getting someone who treats your 
-            world with the same care and respect I’ve learned to give the world at large.
+            or a guardian for your home, you&apos;re getting someone who treats your 
+            world with the same care and respect I&apos;ve learned to give the world at large.
           </p>
         </div>
       </section>

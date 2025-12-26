@@ -85,13 +85,13 @@ export default function Footer() {
         </div>
 {/* Right: Contact Form Teaser + Socials */}
 <div className="lg:text-right">
-  <h3 className="text-lg font-semibold text-foreground mb-6">Let's talk</h3>
+  <h3 className="text-lg font-semibold text-foreground mb-6">Let&apos;s talk</h3>
   
   {/* Mini contact form - no email/phone needed */}
   <div className="bg-white p-6 rounded-2xl border border-brand-border shadow-lg mb-8">
     <form action="/api/contact" method="POST" className="space-y-4">
       <select name="service" required className="w-full p-3 border border-brand-border rounded-xl text-sm focus:ring-2 focus:ring-brand-terracotta focus:border-transparent">
-        <option value="">I'm interested in...</option>
+        <option value="">I&apos;m interested in...</option>
         <option value="hubprosper">Business Services (HubProsper)</option>
         <option value="normlz">Business Services (NORMLZ)</option>
         <option value="tutoring">Tutoring</option>

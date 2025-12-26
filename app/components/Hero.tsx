@@ -14,8 +14,8 @@ export default function Hero() {
             Helping businesses, learners, and pets thrive.
           </h1>
           <p className="text-lg text-brand-muted mb-8 leading-relaxed max-w-lg">
-            I’ve led RevOps initiatives with the C-Suite, taught at a university, and built full stack web solutions.
-              I've also cared for pets and homes across many countries, and made feature films. 
+            I&apos;ve led RevOps initiatives with the C-Suite, taught at a university, and built full stack web solutions.
+              I&apos;ve also cared for pets and homes across many countries, and made feature films. 
             Now, I partner with businesses and individuals to solve practical 
             problems with empathy and technology.
           </p>
